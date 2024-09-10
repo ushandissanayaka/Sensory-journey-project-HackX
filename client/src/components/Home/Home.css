@@ -1,0 +1,5 @@
+.home-container {
+    background: linear-gradient(99deg, #F6A4E9, #AD63E8 100%);
+    /* Ensure the background covers the whole page */
+    min-height: 100vh;
+}
