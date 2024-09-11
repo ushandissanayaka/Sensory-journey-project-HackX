@@ -11,3 +11,7 @@ nav {
 .gradientBg {
     background: linear-gradient(99deg, #F6A4E9, #AD63E8 100%);
 }
+
+.btnPrimary{
+    @apply bg-purple-900  py-3 px-8  text-white rounded-full font-semibold hover:bg-secondary transition-all duration-300
+}
