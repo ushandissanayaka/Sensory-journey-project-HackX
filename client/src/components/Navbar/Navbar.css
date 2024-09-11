@@ -1,0 +1,33 @@
+/* Ensure the navbar stays fixed at the top */
+.navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it stays above other elements */
+  background-color: white; /* Add a background to prevent overlap */
+  padding: 16px; /* Adjust based on your design */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add some margin to the rest of the content to avoid overlap with the navbar */
+.home-container {
+  padding-top: 80px; /* Adjust this value based on the height of the navbar */
+}
+
+/* Other styles for buttons, images, and layout */
+.btnPrimary {
+  background-color: #6200ea;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+}
+
+.btnPrimary:hover {
+  background-color: #3700b3;
+}
+
+/* Example styling for other elements */
