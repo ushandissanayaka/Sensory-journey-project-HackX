@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import children from '../../assets/4.jpeg';
-import '../Home2/home2.css';
+import './Home2.css';
 
 function Home2() {
   const containerRef = useRef(null);
