@@ -1,0 +1,51 @@
+.home2-container {
+    background: linear-gradient(99deg, #000000 , #A17EED 100%);
+    /* Ensure the background covers the whole page */
+    min-height: 100vh;
+}
+.home2-container {
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+  }
+  
+  @keyframes moveLeftToCenter {
+    0% {
+      transform: translateX(-100%); /* Start off screen to the left */
+      opacity: 0;
+    }
+    50% {
+      transform: translateX(0); /* Move to the center */
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(0); /* Stay in the center */
+      opacity: 0; /* Fade out */
+    }
+  }
+  
+  @keyframes moveRightToCenter {
+    0% {
+      transform: translateX(100%); /* Start off screen to the right */
+      opacity: 0;
+    }
+    50% {
+      transform: translateX(0); /* Move to the center */
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(0); /* Stay in the center */
+      opacity: 0; /* Fade out */
+    }
+  }
+  
+  .animate-move-left {
+    animation: moveLeftToCenter 3s ease-in-out infinite;
+  }
+  
+  .animate-move-right {
+    animation: moveRightToCenter 3s ease-in-out infinite;
+  }
+  
+  .in-view {
+    visibility: visible;
+  }
+  
