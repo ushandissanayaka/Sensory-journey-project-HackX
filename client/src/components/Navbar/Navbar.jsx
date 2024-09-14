@@ -12,7 +12,7 @@ function Navbar() {
   };
 
   const navItems = [
-    { link: "Overview", Path: "Home" },
+    { link: "Home", Path: "Home" },
     { link: "Games", Path: "Games" },
     { link: "Doctors", Path: "Doctors" },
     { link: "Skill Centers", Path: "Skill Centers" },
@@ -22,7 +22,7 @@ function Navbar() {
     <>
       <nav
         className="bg-black py-0 px-5 md:px-14 max-w-[calc(100%-20px)] mx-auto text-white fixed top-5 left-0 right-0 z-50 rounded-full navbar-container"
-        style={{ height: '60px', backgroundColor: 'rgba(0, 0, 0, 0.3)', marginTop: "20px" }}
+        style={{ height: '60px', backgroundColor: 'rgba(0, 0, 0, 0.3)', marginTop: "25px" }}
       >
         <div className="container mx-auto flex justify-between items-center h-full font-medium">
           {/* Logo */}
