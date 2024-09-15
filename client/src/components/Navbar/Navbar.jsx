@@ -3,7 +3,7 @@ import Logo from '../../assets/logo.png';
 import { GrLanguage } from "react-icons/gr";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import './Navbar.css';
-
+import { Link } from 'react-router-dom';
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -12,10 +12,10 @@ function Navbar() {
   };
 
   const navItems = [
-    { link: "Home", Path: "Home" },
-    { link: "Games", Path: "Games" },
-    { link: "Doctors", Path: "Doctors" },
-    { link: "Skill Centers", Path: "Skill Centers" },
+    { link: "Home", Path: "/" },
+    { link: "Games", Path: "/Games" },
+    { link: "Doctors", Path: "/Doctors" },
+    { link: "Skill Centers", Path: "/Skill Centers" },
   ];
 
   return (
@@ -26,29 +26,29 @@ function Navbar() {
       >
         <div className="container mx-auto flex justify-between items-center h-full font-medium">
           {/* Logo */}
-          <a href="/" className="">
+          <Link to="/" className="">
             <img src={Logo} alt="Logo" className="w-10 inline-block" />
-          </a>
+          </Link>
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex space-x-12">
             {navItems.map(({ link, Path }) => (
-              <a
+              <Link
                 key={link}
-                href={Path}
+                to={Path}
                 className="block hover:text-gray-400 h-full flex items-center"
               >
                 {link}
-              </a>
+              </Link>
             ))}
           </ul>
 
           {/* Desktop Language and Sign up */}
           <div className="space-x-12 hidden md:flex items-center">
-            <a href="/" className="hidden lg:flex items-center hover:text-gray-400 h-full">
+            <Link to="/" className="hidden lg:flex items-center hover:text-gray-400 h-full">
               <GrLanguage className="mr-2" />
               <span>Language</span>
-            </a>
+            </Link>
             <button className="bg-white text-black py-2 px-4 transition-all duration-300 rounded-3xl hover:text-white hover:bg-purple-400">
               Sign up
             </button>
@@ -77,9 +77,9 @@ function Navbar() {
         }`}
       >
         {navItems.map(({ link, Path }) => (
-          <a key={link} href={Path} className="block hover:text-gray-300">
+          <Link key={link} href={Path} className="block hover:text-gray-300">
             {link}
-          </a>
+          </Link>
         ))}
       </div>
     </>
