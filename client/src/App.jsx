@@ -8,7 +8,7 @@ import Navbar from './components/Navbar/Navbar'
 
 
 function App() {
-  
+
 
   return (
     <>
@@ -16,7 +16,6 @@ function App() {
      <Home/>
      <Home2 />
      <Home3/>
-   
     </>
   )
 }
