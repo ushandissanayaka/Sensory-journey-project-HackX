@@ -1,0 +1,12 @@
+.frame-wrapper {
+    align-items: center;
+    background-color: #774adec9;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 483px;
+    padding: 11px 8px;
+    position: relative;
+    width: 221px;
+}
