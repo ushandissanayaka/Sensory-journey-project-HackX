@@ -1,0 +1,18 @@
+.game-card {
+    background-image: url(./apps-57733-13637508641605361-cc8e5484-9139-4076-9f0b-c1efc564cd93-7f391f8c-e9a8-4580-aa5e-47dce5d5f098.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 267px;
+    position: relative;
+    width: 326px;
+}
+
+.game-card .slice-1 {
+    position: relative !important;
+    top: 147px !important;
+    width: unset !important;
+}
+
+.game-card .slice-instance {
+    width: 326px !important;
+}

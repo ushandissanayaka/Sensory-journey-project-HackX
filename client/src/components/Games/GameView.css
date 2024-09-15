@@ -1,0 +1,12 @@
+.games-view {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.games-view .game-card-wrapper {
+    height: 585px;
+    width: 703px;
+}

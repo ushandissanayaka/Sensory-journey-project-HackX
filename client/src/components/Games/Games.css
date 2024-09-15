@@ -1,0 +1,18 @@
+.desktop {
+    background-color: #c084fc;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.desktop .frame-3319-wrapper {
+    background-color: #c084fc;
+    height: 1024px;
+    width: 1440px;
+}
+
+.desktop .frame-3319 {
+    left: 78px !important;
+    top: 349px !important;
+}
