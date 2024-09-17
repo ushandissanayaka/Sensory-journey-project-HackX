@@ -16,6 +16,7 @@ function Navbar() {
     { link: "Games", Path: "/Games" },
     { link: "Doctors", Path: "/Doctors" },
     { link: "Skill Centers", Path: "/Skill Centers" },
+    { link: "SignUp", Path: "/SignUp" },
   ];
 
   return (
@@ -49,9 +50,12 @@ function Navbar() {
               <GrLanguage className="mr-2" />
               <span>Language</span>
             </Link>
-            <button className="bg-white text-black py-2 px-4 transition-all duration-300 rounded-3xl hover:text-white hover:bg-purple-400">
-              Sign up
-            </button>
+            <Link
+               to="/Signup"  
+               className="bg-white text-black py-2 px-4 transition-all duration-300 rounded-3xl hover:text-white hover:bg-purple-400"
+                >
+                Sign up
+                </Link>
           </div>
 
           {/* Mobile Menu button */}
