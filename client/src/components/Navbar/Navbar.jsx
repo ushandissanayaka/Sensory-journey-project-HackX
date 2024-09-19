@@ -1,11 +1,16 @@
+import React from 'react';
 import { useState } from 'react';
 import Logo from '../../assets/logo.png';
 import { GrLanguage } from "react-icons/gr";
 import { FaBars, FaXmark } from "react-icons/fa6";
-import './Navbar.css';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext'; // Import useAuth to check login status
+import './Navbar.css';
+
+
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isLoggedIn } = useAuth(); // Get isLoggedIn from context
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -16,8 +21,12 @@ function Navbar() {
     { link: "Games", Path: "/Games" },
     { link: "Doctors", Path: "/Doctors" },
     { link: "Skill Centers", Path: "/Skill Centers" },
-    { link: "SignUp", Path: "/SignUp" },
   ];
+
+  // If the user is logged in, do not render the Navbar
+  if (isLoggedIn) {
+    return null;
+  }
 
   return (
     <>
@@ -51,11 +60,11 @@ function Navbar() {
               <span>Language</span>
             </Link>
             <Link
-               to="/Signup"  
-               className="bg-white text-black py-2 px-4 transition-all duration-300 rounded-3xl hover:text-white hover:bg-purple-400"
-                >
-                Sign up
-                </Link>
+              to="/Signup"
+              className="bg-white text-black py-2 px-4 transition-all duration-300 rounded-3xl hover:text-white hover:bg-purple-400"
+            >
+              Sign up
+            </Link>
           </div>
 
           {/* Mobile Menu button */}

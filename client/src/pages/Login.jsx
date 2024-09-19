@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { showLoading, hideLoading } from '../redux/features/alertSlice';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link component
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Import useAuth
 
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { login } = useAuth(); // Get the login function from AuthContext
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -25,7 +27,6 @@ const Login = () => {
         try {
             dispatch(showLoading());
             const res = await axios.post('http://localhost:8080/api/v1/user/login', {
-             
                 email,
                 password
             });
@@ -34,7 +35,11 @@ const Login = () => {
             if (res.data.success) {
                 localStorage.setItem('token', res.data.token);
                 alert('Login Successfully');
-                navigate('/');
+                
+                // Call login function to update authentication state
+                login({ email });
+
+                navigate('/PublicDashboard');
             } else {
                 alert(res.data.message);
             }
@@ -52,7 +57,7 @@ const Login = () => {
         >
             <div className="relative w-400px" style={{ zIndex: 10 }}>
                 <img
-                    src="https://via.placeholder.com/400x300" // Replace with the actual image URL
+                    src="https://via.placeholder.com/400x300"
                     alt="login illustration"
                     className="object-cover w-full h-full"
                     style={{ marginRight: '-10px', position: 'relative', zIndex: 10 }}
@@ -66,17 +71,17 @@ const Login = () => {
                     position: 'relative',
                     zIndex: 5,
                     height: '370px',
-                    backdropFilter: 'blur(10px)', // Frosted glass effect
-                    background: 'rgba(255, 255, 255, 0.15)', // Glass-like semi-transparent background
+                    backdropFilter: 'blur(10px)',
+                    background: 'rgba(255, 255, 255, 0.15)',
                     borderRadius: '16px',
-                    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', // Soft shadow
-                    border: '1px solid rgba(255, 255, 255, 0.3)' // Subtle border
+                    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+                    border: '1px solid rgba(255, 255, 255, 0.3)'
                 }}
             >
                 <div className="w-full p-8 bg-gradient-to-br from-gray-100 to-gray-300 rounded-lg">
                     <h2 className="text-3xl font-bold mb-6 text-center text-purple-800">Login</h2>
                     <form onSubmit={handleSubmit} className="space-y-4">
-                    <label className="mb-1 text-purple-700 font-semibold">Name</label>
+                        <label className="mb-1 text-purple-700 font-semibold">Email</label>
                         <input
                             name="email"
                             type="email"
@@ -86,7 +91,7 @@ const Login = () => {
                             className="w-full p-2 border-b-2 border-gray-300 focus:border-purple-500 outline-none bg-transparent"
                             style={{ border: 'none', borderBottom: '2px solid #ccc' }}
                         />
-                      <label className="mb-1 text-purple-700 font-semibold">Email</label>
+                        <label className="mb-1 text-purple-700 font-semibold">Password</label>
                         <input
                             name="password"
                             type="password"
@@ -98,16 +103,22 @@ const Login = () => {
                         />
                         <button
                             type="submit"
-                            className="w-full text-white py-2 rounded-md mt-6 hover:bg-purple-700 transition-colors"
-                            style={{ background: 'linear-gradient(to right, #6a0dad, #000000)' }}
+                            className="w-full py-2 px-4 mt-4 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition-colors duration-300"
                         >
                             Login
                         </button>
                     </form>
-                    <div className="text-center mt-4">
-                        <Link to="/SignUp" className='m-2 text-purple-600 hover:underline'>
-                            Not a user? Register here
-                        </Link>
+
+                    <div className="mt-4 text-center">
+                        <p className="text-sm">
+                            Don't have an account?{' '}
+                            <Link
+                                to="/Signup"
+                                className="text-purple-600 font-semibold hover:text-purple-800"
+                            >
+                                Sign up here
+                            </Link>
+                        </p>
                     </div>
                 </div>
             </div>
