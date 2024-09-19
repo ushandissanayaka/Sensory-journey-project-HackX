@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Games from './components/Games/Games.jsx'; 
 import SignUp from './pages/SignUp';
 import Login from './pages/Login'
+import Users from './pages/admin/Users';
+import Doctors from './pages/admin/Doctors';
 import PublicRoute from "./components/PublicRoute";
 import PublicDashboard from './pages/PublicDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -38,6 +40,8 @@ function App() {
   <Route path="/SignUp" element={<PublicRoute><SignUp /></PublicRoute>} />
   <Route path="/Login" element={     <PublicRoute><Login /></PublicRoute>} />
   <Route path="/PublicDashboard" element={ <ProtectedRoute><PublicDashboard/></ProtectedRoute> }/>
+  <Route path="/admin/users" element={ <ProtectedRoute><Users/></ProtectedRoute> }/>
+  <Route path="/admin/doctors" element={ <ProtectedRoute><Doctors/></ProtectedRoute> }/>
 </Routes>
 </Router>
 </AuthProvider>
