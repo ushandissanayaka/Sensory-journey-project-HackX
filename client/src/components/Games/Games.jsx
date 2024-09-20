@@ -2,18 +2,19 @@ import React from 'react'
 import Navbar from '../Navbar/Navbar'
 import './Games.css'
 import FrameWrapper from './FrameWrapper'
+import GameCard1 from '../../assets/GameCard1.png'
 import { GameView } from './GameView'
+
 
 const Games = () => {
   return (
     <>
     <Navbar></Navbar>
     <div className="desktop">
-    <div className="frame-3319-wrapper flex justify-start items-center pl-6">
-    <FrameWrapper className="frame-3319" />
+    <div className="frame-3319-wrapper  flex justify-center">
+    <FrameWrapper />
 </div>
-<div className='flex justify-start items-center'><GameView></GameView></div>
-
+    <GameView></GameView>
 </div>
 
 

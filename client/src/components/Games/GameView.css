@@ -1,12 +1,26 @@
-.games-view {
-    background-color: transparent;
+
+#card-area {
     display: flex;
-    flex-direction: row;
+    position: relative;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    height: 80vh; /* Full viewport height to center vertically */
+    width: 50vw;
+    top: 15vh;
+    left: 10vw;
+    background-color: #c084fc;
 }
 
-.games-view .game-card-wrapper {
-    height: 585px;
-    width: 703px;
+.wrapper {
+    width: 100%; 
+    height: 100%; 
+    overflow-y: auto; 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Ensures two boxes per row */
+    grid-column-gap: 100px; /* Adds gap between rows and columns */
+    padding: 20px;
+    grid-row-gap: 30px;
+   
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
