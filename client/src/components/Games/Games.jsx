@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Navbar from '../Navbar/Navbar'
 import './Games.css'
 import FrameWrapper from './FrameWrapper'
@@ -7,14 +7,15 @@ import { GameView } from './GameView'
 
 
 const Games = () => {
+  const [selectedTag,setSelectedTag]=useState(null);
   return (
     <>
     <Navbar></Navbar>
     <div className="desktop">
     <div className="frame-3319-wrapper  flex justify-center">
-    <FrameWrapper />
+    <FrameWrapper setSelectedTag={setSelectedTag} />
 </div>
-    <GameView></GameView>
+    <GameView selectedTag={selectedTag} setSelectedTag={setSelectedTag}></GameView>
 </div>
 
 
