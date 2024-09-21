@@ -11,13 +11,14 @@ import UserResources from './pages/user/UserResources.jsx'
 import UserAppointments from './pages/user/UserAppointments.jsx'
 import SignUp from './pages/SignUp';
 import Login from './pages/Login'
-import Users from './pages/admin/Users';
-import Doctors from './pages/admin/Doctors';
+import Users from './pages/admin/Users.jsx'
+import Doctors from './pages/admin/Doctors.jsx'
 import PublicRoute from "./components/PublicRoute";
 import PublicDashboard from './pages/PublicDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import { AuthProvider  } from './context/AuthContext';
-import ApplyDoctor from './pages/ApplyDoctor.jsx'
+import ApplyDoctor from './pages/ApplyDoctor.jsx';
+import Appointments from './pages/Appointments.jsx'
 function App() {
 
   
@@ -49,6 +50,7 @@ function App() {
   <Route path="/admin/users" element={ <ProtectedRoute><Users/></ProtectedRoute> }/>
   <Route path="/admin/doctors" element={ <ProtectedRoute><Doctors/></ProtectedRoute> }/>
   <Route path="/apply-doctor" element={ <ProtectedRoute><ApplyDoctor/></ProtectedRoute> }/>
+  <Route path="/appoinments" element={ <ProtectedRoute><Appointments /></ProtectedRoute> }/>
 </Routes>
 </Router>
 </AuthProvider>
