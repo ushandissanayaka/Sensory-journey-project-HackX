@@ -17,7 +17,7 @@ export const userMenu = [
     },
     {
       name: 'Appointments',
-      path: "/user/Appointments",
+      path: "/appoinments",
       icon: 'fa-solid fa-clipboard-list'
     },
     {
