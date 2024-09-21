@@ -14,7 +14,7 @@ import PublicRoute from "./components/PublicRoute";
 import PublicDashboard from './pages/PublicDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import { AuthProvider  } from './context/AuthContext';
-
+import ApplyDoctor from './pages/ApplyDoctor.jsx'
 function App() {
 
   
@@ -42,6 +42,7 @@ function App() {
   <Route path="/PublicDashboard" element={ <ProtectedRoute><PublicDashboard/></ProtectedRoute> }/>
   <Route path="/admin/users" element={ <ProtectedRoute><Users/></ProtectedRoute> }/>
   <Route path="/admin/doctors" element={ <ProtectedRoute><Doctors/></ProtectedRoute> }/>
+  <Route path="/apply-doctor" element={ <ProtectedRoute><ApplyDoctor/></ProtectedRoute> }/>
 </Routes>
 </Router>
 </AuthProvider>
