@@ -6,8 +6,18 @@ export const userMenu = [
       icon: "fa-solid fa-house"
     },
     {
+      name: 'Games',
+      path: "/user/Games",
+      icon: 'fa-solid fa-clipboard-list'
+    },
+    {
+      name: 'Resources',
+      path: "/user/Resources",
+      icon: 'fa-solid fa-clipboard-list'
+    },
+    {
       name: 'Appointments',
-      path: "/appointments",
+      path: "/user/Appointments",
       icon: 'fa-solid fa-clipboard-list'
     },
     {
