@@ -1,7 +1,7 @@
 // User Menu
 export const userMenu = [
     {
-      name: 'Home',
+      name: 'Dashboard',
       path: '/',
       icon: "fa-solid fa-house"
     },
@@ -25,7 +25,7 @@ export const userMenu = [
   // Admin Menu
   export const adminMenu = [
     {
-      name: 'Home',
+      name: 'Dashboard',
       path: '/',
       icon: "fa-solid fa-house"
     },
