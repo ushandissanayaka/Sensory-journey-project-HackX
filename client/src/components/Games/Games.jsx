@@ -13,7 +13,7 @@ const Games = () => {
     <Navbar></Navbar>
     <div className="desktop">
     <div className="frame-3319-wrapper  flex justify-center">
-    <FrameWrapper setSelectedTag={setSelectedTag} />
+    <FrameWrapper selectedTag={selectedTag} setSelectedTag={setSelectedTag} />
 </div>
     <GameView selectedTag={selectedTag} setSelectedTag={setSelectedTag}></GameView>
 </div>
