@@ -1,0 +1,15 @@
+
+.row1{
+    width: 70%;
+    overflow-y: auto; 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Ensures two boxes per row */
+    grid-gap: 30px; /* Adds gap between rows and columns */
+    padding: 20px;
+    
+   
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
