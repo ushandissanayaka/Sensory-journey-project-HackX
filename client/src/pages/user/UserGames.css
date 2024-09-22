@@ -10,6 +10,21 @@
         position: relative;
         top:2vh;
         left: 5vw;
+        width: 50vw;
+        height: 78vh;
     
     
 }
+.head{
+    text-shadow:
+    3px 3px 0px #019ab9,   /* Blue Shadow */
+    6px 6px 0px #017289,   /* Blue Shadow (deeper) */
+    9px 9px 0px #4c2179,   /* Purple Shadow */
+    12px 12px 0px #4c2179; /* Purple Shadow (deeper) */
+
+  /* Optional: Outer yellow stroke */
+  -webkit-text-stroke: 2px #fcbd3f; /* Yellow border */
+}
+
+
+

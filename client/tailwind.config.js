@@ -10,8 +10,11 @@ export default {
         "primary": "#695B5B",
         "secondary": "#AD63E8",
         "tartiary": "#A17EED",
-        "pink": "#F6A4E9"
+        "pink": "#F6A4E9" 
 
+      },
+      fontFamily: {
+        sedgwick: ['"Sedgwick Ave Display"', 'cursive'],
       }
     },
   },
