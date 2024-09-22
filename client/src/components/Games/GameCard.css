@@ -6,6 +6,7 @@
     width: 100%;
     min-width: 290px;
     min-height: 254px;
+    max-height: 254px;
     height: 100%;
 }
 
