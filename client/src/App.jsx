@@ -40,11 +40,11 @@ function App() {
 <Routes>
   
   <Route path="/" element={<><Home /><Home2 /><Home3 /></>} />
-  <Route path="/Games" element={<Games />} />
+  <Route path="/Games" element={<Games height={'100vh'} />} />
   <Route path="/SignUp" element={<PublicRoute><SignUp /></PublicRoute>} />
   <Route path="/Login" element={     <PublicRoute><Login /></PublicRoute>} />
   <Route path="/PublicDashboard" element={ <ProtectedRoute><PublicDashboard/></ProtectedRoute> }/>
-  <Route path="/user/Games" element={ <ProtectedRoute><UserGames/></ProtectedRoute> }/>
+  <Route path="/user/Games" element={<ProtectedRoute><UserGames /> </ProtectedRoute>}/>
   <Route path="/user/Resources" element={ <ProtectedRoute><UserResources/></ProtectedRoute> }/>
   <Route path="/user/Appointments" element={ <ProtectedRoute><UserAppointments/></ProtectedRoute> }/>
   <Route path="/admin/users" element={ <ProtectedRoute><Users/></ProtectedRoute> }/>

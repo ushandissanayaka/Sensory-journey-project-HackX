@@ -30,6 +30,20 @@ export const GameView = ({selectedTag,setSelectedTag}) => {
             GamePhoto:GameCard3,
             Tag1:'Visual',
             Tag2:'Sound'
+        },
+        {
+            GameName:'Bubble Pop',
+            GameDescription:'Pop colorful bubbles as they float across the screen!',
+            GamePhoto:GameCard3,
+            Tag1:'Visual',
+            Tag2:'Sound'
+        },
+        {
+            GameName:'Bubble Pop',
+            GameDescription:'Pop colorful bubbles as they float across the screen!',
+            GamePhoto:GameCard3,
+            Tag1:'Visual',
+            Tag2:'Sound'
         }
 
 
