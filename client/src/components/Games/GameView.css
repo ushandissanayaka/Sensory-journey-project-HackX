@@ -6,8 +6,7 @@
     align-items: center;
     height: 80vh; /* Full viewport height to center vertically */
     width: 50vw;
-    top: 15vh;
-    left: 10vw;
+    
     background-color: #c084fc;
     ;
 }
@@ -24,4 +23,6 @@
    
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
 }

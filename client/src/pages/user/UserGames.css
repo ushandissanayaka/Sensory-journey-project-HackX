@@ -1,0 +1,15 @@
+.filling{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    
+    
+}
+.userGamesCardContaier{
+   
+        position: relative;
+        top:2vh;
+        left: 5vw;
+    
+    
+}

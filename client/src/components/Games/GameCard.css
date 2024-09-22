@@ -4,8 +4,8 @@
     overflow: hidden;
     box-shadow: 5px 5px 15px black;
     width: 100%;
-    max-width: 300px;
-    max-height: 264px;
+    min-width: 290px;
+    min-height: 254px;
     height: 100%;
 }
 
