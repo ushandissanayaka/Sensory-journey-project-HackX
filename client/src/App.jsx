@@ -19,6 +19,10 @@ import ProtectedRoute from './components/ProtectedRoute'
 import { AuthProvider  } from './context/AuthContext';
 import ApplyDoctor from './pages/ApplyDoctor.jsx';
 import Appointments from './pages/Appointments.jsx'
+import Articles from './pages/user/Resources/Articles.jsx'
+import Guides from './pages/user/Resources/Guides.jsx'
+import Videos from './pages/user/Resources/Videos.jsx'
+
 function App() {
 
   
@@ -46,6 +50,11 @@ function App() {
   <Route path="/PublicDashboard" element={ <ProtectedRoute><PublicDashboard/></ProtectedRoute> }/>
   <Route path="/user/Games" element={<ProtectedRoute><UserGames /> </ProtectedRoute>}/>
   <Route path="/user/Resources" element={ <ProtectedRoute><UserResources/></ProtectedRoute> }/>
+  <Route path="/user/Resources/Articles" element={ <ProtectedRoute><Articles/></ProtectedRoute> }/>
+  <Route path="/user/Resources/Guides" element={ <ProtectedRoute><Guides/></ProtectedRoute> }/>
+  <Route path="/user/Resources/Videos" element={ <ProtectedRoute><Videos/></ProtectedRoute> }/>
+
+
   <Route path="/user/Appointments" element={ <ProtectedRoute><UserAppointments/></ProtectedRoute> }/>
   <Route path="/admin/users" element={ <ProtectedRoute><Users/></ProtectedRoute> }/>
   <Route path="/admin/doctors" element={ <ProtectedRoute><Doctors/></ProtectedRoute> }/>
