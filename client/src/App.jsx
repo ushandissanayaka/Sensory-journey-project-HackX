@@ -22,6 +22,8 @@ import Appointments from './pages/Appointments.jsx'
 import Articles from './pages/user/Resources/Articles.jsx'
 import Guides from './pages/user/Resources/Guides.jsx'
 import Videos from './pages/user/Resources/Videos.jsx'
+import MemoryGame from './pages/MemoryGame.jsx'
+import MazeQuest from './pages/MazeQuest.jsx'
 
 function App() {
 
@@ -60,6 +62,8 @@ function App() {
   <Route path="/admin/doctors" element={ <ProtectedRoute><Doctors/></ProtectedRoute> }/>
   <Route path="/apply-doctor" element={ <ProtectedRoute><ApplyDoctor/></ProtectedRoute> }/>
   <Route path="/appoinments" element={ <ProtectedRoute><Appointments /></ProtectedRoute> }/>
+  <Route path="/game1" element={ <MemoryGame />}/>
+  <Route path="/game2" element={ <MazeQuest />}/>
 </Routes>
 </Router>
 </AuthProvider>
