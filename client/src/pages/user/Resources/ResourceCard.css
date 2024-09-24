@@ -11,7 +11,7 @@
     
 }
 
-.overlay{
+.overlay1{
     height: 100%; /* Keep the full height of the box */
     width: 100%;
     background: linear-gradient(transparent, #156070 20%);
@@ -30,6 +30,6 @@
     transition: bottom 0.5s ease; /* Animate the 'bottom' position */
     
 }
-.box1:hover .overlay {
+.box1:hover .overlay1 {
     bottom: 0; /* Bring the overlay up when hovering */
 }
