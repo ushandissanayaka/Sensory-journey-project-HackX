@@ -11,23 +11,29 @@ const SignUp = () => {
         name: '',
         email: '',
         password: '',
+        isAdmin: false,
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        const { name, value, type, checked } = e.target;
+        if (type === 'checkbox') {
+            setFormData({ ...formData, [name]: checked });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, email, password } = formData;
+        const { name, email, password, isAdmin } = formData;
 
         try {
             dispatch(showLoading());
             const res = await axios.post('http://localhost:8080/api/v1/user/register', {
                 name,
                 email,
-                password
+                password,
+                isAdmin,
             });
             dispatch(hideLoading());
             if (res.data.success) {
@@ -52,7 +58,7 @@ const SignUp = () => {
                 {/* Image */}
                 <div className="relative w-[400px]" style={{ zIndex: 10, marginRight: '-15px' }}>
                     <img
-                        src="https://via.placeholder.com/400x300" // Replace with the actual image URL
+                        src="https://via.placeholder.com/400x300"
                         alt="signup illustration"
                         className="object-cover w-full h-full"
                     />
@@ -64,14 +70,14 @@ const SignUp = () => {
                         position: 'relative',
                         zIndex: 5,
                         backdropFilter: 'blur(10px)',
-                        background: 'rgba(255, 255, 255, 0.01)', // Glass effect background
+                        background: 'rgba(255, 255, 255, 0.01)',
                         borderRadius: '20px',
-                        boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)', // Soft shadow
-                        border: '1px solid rgba(255, 255, 255, 0.3)' // Light border
+                        boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+                        border: '1px solid rgba(255, 255, 255, 0.3)'
                     }}>
-                    <div className="w-full p-8 bg-gradient-to-br from-gray-100 to-gray-300 rounded-lg">
-                        <h2 className="text-3xl font-bold mb-6 text-center text-purple-800">Sign Up</h2>
-                        <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="w-full p-6 bg-gradient-to-br from-gray-100 to-gray-300 rounded-lg">
+                        <h2 className="text-3xl font-bold mb-4 text-center text-purple-800">Sign Up</h2>
+                        <form onSubmit={handleSubmit} className="space-y-3">
                             <div className="flex flex-col">
                                 <label className="mb-1 text-purple-700 font-semibold">Name</label>
                                 <input
@@ -111,9 +117,21 @@ const SignUp = () => {
                                 />
                             </div>
 
+                            {/* isAdmin Checkbox */}
+                            <div className="flex items-center">
+                                <input
+                                    type="checkbox"
+                                    name="isAdmin"
+                                    checked={formData.isAdmin}
+                                    onChange={handleChange}
+                                    className="mr-2"
+                                />
+                                <label className="text-purple-700 font-semibold">If you are an admin? please tick here to register</label>
+                            </div>
+
                             <button
                                 type="submit"
-                                className="w-full text-white py-2 rounded-md mt-6 hover:bg-purple-700 transition-colors"
+                                className="w-full text-white py-2 rounded-md mt-4 hover:bg-purple-700 transition-colors"
                                 style={{ background: 'linear-gradient(to right,#6a0dad, #000000)' }}
                             >
                                 Sign Up
@@ -121,7 +139,7 @@ const SignUp = () => {
                         </form>
 
                         {/* Link to login */}
-                        <div className="text-center mt-4">
+                        <div className="text-center mt-3">
                             <Link to="/login" className="text-purple-600 hover:underline">
                                 Already a user? Login here
                             </Link>
