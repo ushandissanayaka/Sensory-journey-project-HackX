@@ -10,6 +10,9 @@
     
     
 }
+.desc{
+    color: white;
+}
 
 .overlay{
     height: 100%; /* Keep the full height of the box */
