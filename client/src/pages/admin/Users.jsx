@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './../../components/Layout';
 import axios from 'axios';
-import usersImage from '../../assets/users.jpeg'; // Ensure the image path is correct
+import usersImage from '../../assets/users.jpg'; // Ensure the image path is correct
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -53,7 +53,7 @@ const Users = () => {
         className="bg-cover bg-center relative"
         style={{ backgroundImage: `url(${usersImage})`, height: 'calc(100vh - 14vh)' }} // Reduce height by 10px
       >
-        <div className="absolute inset-0 bg-black opacity-50"></div> {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black opacity-40"></div> {/* Dark overlay */}
         <h1 className="text-4xl font-bold mb-4 text-white text-center relative">Users List</h1>
         <div className="overflow-x-auto bg-white bg-opacity-30 rounded-lg p-4 relative z-10">
           <table className="min-w-full bg-white bg-opacity-50">
