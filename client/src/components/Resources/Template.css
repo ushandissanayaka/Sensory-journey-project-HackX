@@ -14,3 +14,9 @@
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE and Edge */
 }
+.head1{
+    text-shadow: 3px 3px 0px #a96cea, 6px 6px 0px #804eb5, 9px 9px 0px #9a8d1a22, 12px 12px 0px #0000003c;
+    color: rgb(64 64 173);
+    -webkit-text-stroke: 2px #d7ff4f;
+    
+}

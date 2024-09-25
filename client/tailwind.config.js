@@ -15,6 +15,7 @@ export default {
       },
       fontFamily: {
         sedgwick: ['"Sedgwick Ave Display"', 'cursive'],
+        
       }
     },
   },

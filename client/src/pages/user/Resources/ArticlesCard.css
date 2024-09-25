@@ -10,8 +10,11 @@
     
     
 }
+.desc{
+    
+}
 
-.overlay{
+.overlay2{
     height: 100%; /* Keep the full height of the box */
     width: 100%;
     background: linear-gradient(transparent, #000000 30%);
@@ -21,7 +24,7 @@
     bottom: 0; /* Start off-screen */
     display: flex;
     align-items: center;
-   
+   color: #c7ffff;
     justify-content: space-evenly;
     flex-direction: column;
     padding-inline: 5%;
