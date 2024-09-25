@@ -17,7 +17,7 @@ const Articles = () => {
   useEffect(() => {
     const fetchArticles = async () => {
         try {
-          setLoading(true)
+          setLoadingHome(true)
             const res = await axios.get('http://localhost:8080/api/v1/user/resources/article', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -31,13 +31,14 @@ const Articles = () => {
                     article.description,
                     article.link,
                   ]);
-                  setLoading(false)
+                  setLoadingHome(false)
                   setArticlesData(transformedArticles); // Set transformed array in state
                   s
             }
+            
         } catch (error) {
             console.log(error);
-            setLoading(false)
+            setLoadingHome(false)
         }
     };
 
