@@ -21,7 +21,7 @@ const UserResources = () => {
             alt="Resources Cover"
           />
           <div className="relative z-10 flex flex-col items-center justify-start h-full">
-            <h1 className="head text-6xl font-semibold text-gray-500 text-center font-sedgwick">
+            <h1 className="head2 text-6xl font-semibold text-gray-500 text-center font-mono">
               Resources for Autism Support
             </h1>
 

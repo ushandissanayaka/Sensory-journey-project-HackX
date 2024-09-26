@@ -6,8 +6,8 @@
     align-items: center;
     height: 100%; /* Full viewport height to center vertically */
     width: 100%;
-    
-    background-color: #c084fc;
+    border-radius: 15px;
+    background-color: #c084fc75;
     ;
 }
 
