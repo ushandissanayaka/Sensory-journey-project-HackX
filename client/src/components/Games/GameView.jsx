@@ -14,17 +14,17 @@ export const GameView = ({ selectedTag, setSelectedTag }) => {
 
   const games = [
     {
-      GameName: "Color Safari",
-      GameDescription: "Join and color animals and feed them",
+      GameName: "Memory Game",
+      GameDescription: "Let's check your memory skills!",
       GamePhoto: GameCard1,
       Tag1: "Visual",
       Tag2: "Pattern Recognition",
       link: "/memorygame",
     },
     {
-      GameName: "Scribbler Splash",
+      GameName: "Honey Bee",
       GameDescription:
-        "Unleash your creativity with vibrant strokes and playful textures on a blank canvas!",
+        "Unleash your pattern recognition skills and help the bee find its way back to the hive!",
       GamePhoto: GameCard2,
       Tag1: "Creativity",
       Tag2: "Fine Motor Skills",

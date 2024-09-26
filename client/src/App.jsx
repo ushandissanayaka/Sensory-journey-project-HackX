@@ -64,7 +64,7 @@ function App() {
   <Route path="/apply-doctor" element={ <ProtectedRoute><ApplyDoctor/></ProtectedRoute> }/>
   <Route path="/appoinments" element={ <ProtectedRoute><Appointments /></ProtectedRoute> }/>
   <Route path="/memorygame" element={ <ProtectedRoute><MemoryGame /></ProtectedRoute>}/>
-  <Route path="/memoryquest" element={ <ProtectedRoute><MazeQuest /></ProtectedRoute>}/>
+  <Route path="/memoryquest" element={ <MazeQuest />}/>
   <Route path="/doctor/profile/:id" element={<ProtectedRoute><Doctorprofile/></ProtectedRoute>}/>
 </Routes>
 </Router>
