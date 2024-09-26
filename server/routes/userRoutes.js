@@ -1,7 +1,7 @@
 const express = require('express');
 const { loginController, registerController, authController, applyDoctorController,getAllNotificationController, deleteAllNotificationController, getAllDoctorsController, bookAppointmentController, bookingAvailabilityController, userAppoinmentsController, gameController, gameRetrieveController } = require('../controllers/userCtrl');
 const authMiddleware = require('../midddlewares/authMiddleware');
-
+const {articleController,guideController} = require('../controllers/userResourcesCtrl')
 
 // router object
 const router = express.Router();
@@ -42,4 +42,8 @@ router.post('/game', gameController)
 
 //Game Retrieve
 router.get('/game', gameRetrieveController)
+
+router.get('/resources/article',authMiddleware,articleController)
+router.get('/resources/guide',authMiddleware,guideController)
+
 module.exports = router;

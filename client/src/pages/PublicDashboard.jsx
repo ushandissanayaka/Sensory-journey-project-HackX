@@ -6,7 +6,7 @@ const PublicDashboard = () => {
   return (
     <Layout>
       <div
-        className="relative flex flex-col items-center justify-center h-[calc(88vh)] bg-cover bg-center text-white"
+        className="relative flex flex-col items-center justify-center h-[calc(90vh)] bg-cover bg-center text-white"
         style={{ backgroundImage: `url(${bgImage})` }} // Corrected the URL syntax
       >
         <div className="absolute inset-0 bg-black opacity-30"></div>
