@@ -381,7 +381,7 @@ const MazeQuest = () => {
   );
 
   const IntroPage = () => (
-    <div className="flex items-center justify-center bg-gradient-to-b from-yellow-100 to-green-100 p-4 bg-cover">
+    <div className="flex items-center justify-center bg-gradient-to-b from-yellow-100 to-green-100 p-4">
       <img src={BeeDesc} alt="Bee Description" className="absolute z-0" />
       <div className="bg-amber-50 rounded-3xl shadow-2xl p-8 max-w-2xl w-full relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10">
@@ -487,7 +487,7 @@ const MazeQuest = () => {
 
   // The main game screen (previously the default return)
   return (
-    <div className="relative  w-full">
+    <div className="relative  w-full bg-green-600 bg-cover h-[100vh]">
 
       {/* Main Game Container */}
       <div className="relative flex items-center justify-center  z-10">

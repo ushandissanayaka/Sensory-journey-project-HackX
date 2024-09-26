@@ -16,10 +16,11 @@ const PokemonGameStatus = ({
   const getLevelMax = (level) => {
     switch (level) {
       case 1:
+        return 0.2;
       case 2:
-        return 0.2
+        return 0.8
       case 3:
-        return 0.8;
+        return 1.6;
       case 4:
         return 1.6;
       case 5:
