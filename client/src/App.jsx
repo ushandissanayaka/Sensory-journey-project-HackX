@@ -22,7 +22,10 @@ import Appointments from './pages/Appointments.jsx'
 import Articles from './pages/user/Resources/Articles.jsx'
 import Guides from './pages/user/Resources/Guides.jsx'
 import Videos from './pages/user/Resources/Videos.jsx'
+import MemoryGame from './pages/MemoryGame.jsx'
+import MazeQuest from './pages/MazeQuest.jsx'
 import Doctorprofile from './pages/doctor/Doctorprofile.jsx'
+
 function App() {
 
   
@@ -60,6 +63,8 @@ function App() {
   <Route path="/admin/doctors" element={ <ProtectedRoute><Doctors/></ProtectedRoute> }/>
   <Route path="/apply-doctor" element={ <ProtectedRoute><ApplyDoctor/></ProtectedRoute> }/>
   <Route path="/appoinments" element={ <ProtectedRoute><Appointments /></ProtectedRoute> }/>
+  <Route path="/memorygame" element={ <ProtectedRoute><MemoryGame /></ProtectedRoute>}/>
+  <Route path="/memoryquest" element={ <ProtectedRoute><MazeQuest /></ProtectedRoute>}/>
   <Route path="/doctor/profile/:id" element={<ProtectedRoute><Doctorprofile/></ProtectedRoute>}/>
 </Routes>
 </Router>
