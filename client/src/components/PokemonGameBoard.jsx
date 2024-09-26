@@ -5,7 +5,7 @@ import Back from "../assets/back.jpg";
 const PokemonGameBoard = ({ board, columns, imageMap, selectCard }) => {
   return (
     <motion.div
-      className="grid gap-4 justify-center mb-5"
+      className="grid gap-4 justify-center mb-5 w-2/5 absolute left-[400px] top-[160px]"
       style={{
         gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`, // Dynamic grid column count
         maxWidth: "100%", // Ensures it doesn't exceed the screen width

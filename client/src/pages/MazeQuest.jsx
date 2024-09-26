@@ -9,6 +9,9 @@ import {
   ChevronUp,
   ChevronDown,
 } from "lucide-react";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const GRID_SIZES = [8, 10, 12, 15];
 const MAX_LEVEL = 4;
@@ -24,8 +27,65 @@ const MazeQuest = () => {
   const [gameOver, setGameOver] = useState(false);
   const [autoSolve, setAutoSolve] = useState(false);
   const [energy, setEnergy] = useState(100);
+  const [score, setScore] = useState(0);
+  let [mark, setMark] = useState(0);
+  const [userId, setUserId] = useState(null);
+  const [gameId, setGameId] = useState(1);
 
   const GRID_SIZE = GRID_SIZES[level - 1];
+
+  const navigate = useNavigate();
+
+  // Function to fetch user's initial score and level from the backend
+  const fetchGameData = useCallback(async () => {
+    const userId = getUserIdFromToken();
+    if (userId) {
+      setUserId(userId);
+    } else {
+      // Handle case where userId is not found or token is invalid
+    }
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/v1/user/game?userId=${userId}&gameId=${gameId}`
+      );
+      if (response.data && response.data.success) {
+        const { score, level } = response.data.data; // Assuming backend sends these
+        mark = score;
+        setLevel(level);
+      }
+    } catch (error) {
+      console.error("Error fetching game data:", error);
+    }
+  }, [gameId]);
+
+  // Function to update the game data (score and level) in the backend after each level or game over
+  const updateGameData = async () => {
+    try {
+      console.log(mark);
+      await axios.post("http://localhost:8080/api/v1/user/game", {
+        userId,
+        gameId,
+        mark,
+        level,
+      });
+    } catch (error) {
+      console.error("Error updating game data:", error);
+    }
+  };
+
+  const getUserIdFromToken = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        return decodedToken.id; // assuming 'id' is the field containing the userId
+      } catch (error) {
+        console.error("Invalid token:", error);
+        return null;
+      }
+    }
+    return null;
+  };
 
   const generateMaze = useCallback(() => {
     const newMaze = Array(GRID_SIZE)

@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import confetti from "canvas-confetti";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 // Import images (assuming these imports work in your project structure)
 import Darkness from "../assets/darkness.jpg";
@@ -20,6 +22,7 @@ import PokemonStartButton from "../components/PokemonStartButton";
 import PokemonGameStatus from "../components/PokemonGameStatus";
 import PokemonGameBoard from "../components/PokemonGameBoard";
 import LevelUpAnimation from "../components/LevelUpAnimation";
+import backLogo from "../assets/3.png";
 
 const imageMap = {
   darkness: Darkness,
@@ -42,8 +45,9 @@ const MemoryGame = () => {
   const [columns, setColumns] = useState(2);
   const [selectedCards, setSelectedCards] = useState([]);
   const [errors, setErrors] = useState(0);
-  const [level, setLevel] = useState(1);
+  let [level, setLevel] = useState(1);
   const [score, setScore] = useState(0);
+  let [mark, setMark] = useState(0);
   const [matchedPairs, setMatchedPairs] = useState(0);
   const [gameState, setGameState] = useState("start"); // "start", "playing", "paused", "gameOver"
   const [timeLeft, setTimeLeft] = useState(60);
@@ -51,6 +55,63 @@ const MemoryGame = () => {
   const [powerUp, setPowerUp] = useState(null);
   const [isChecking, setIsChecking] = useState(false);
   const [showLevelUp, setShowLevelUp] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [gameId, setGameId] = useState(0);
+
+  const navigate = useNavigate();
+
+  // Function to fetch user's initial score and level from the backend
+  const fetchGameData = useCallback(async () => {
+    const userId = getUserIdFromToken();
+    if (userId) {
+      setUserId(userId);
+    } else {
+      // Handle case where userId is not found or token is invalid
+    }
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/v1/user/game?userId=${userId}&gameId=${gameId}`
+      );
+      if (response.data && response.data.success) {
+        const { score, level } = response.data.data; // Assuming backend sends these
+        mark = score;
+        setLevel(level);
+        setRows(2 * level)
+        setColumns(2 * level)
+      }
+    } catch (error) {
+      console.error("Error fetching game data:", error);
+    }
+  }, [gameId]);
+
+  // Function to update the game data (score and level) in the backend after each level or game over
+  const updateGameData = async () => {
+    try {
+      console.log(mark);
+      await axios.post("http://localhost:8080/api/v1/user/game", {
+        userId,
+        gameId,
+        mark,
+        level,
+      });
+    } catch (error) {
+      console.error("Error updating game data:", error);
+    }
+  };
+
+  const getUserIdFromToken = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        return decodedToken.id; // assuming 'id' is the field containing the userId
+      } catch (error) {
+        console.error("Invalid token:", error);
+        return null;
+      }
+    }
+    return null;
+  };
 
   // Function to handle the level completion logic
   const checkForLevelCompletion = () => {
@@ -87,7 +148,8 @@ const MemoryGame = () => {
     return newBoard;
   }, [rows, columns, shuffleCards]);
 
-  const startNewGame = useCallback(() => {
+  const startNewGame = useCallback(async () => {
+    await fetchGameData();
     const newBoard = createBoard();
     setBoard(newBoard);
     setSelectedCards([]);
@@ -118,6 +180,7 @@ const MemoryGame = () => {
           if (prevTime <= 1) {
             clearInterval(timer);
             setGameState("gameOver");
+            updateGameData();
             return 0;
           }
           return prevTime - 1;
@@ -156,7 +219,7 @@ const MemoryGame = () => {
       setBoard(newBoard);
       setMatchedPairs((prev) => prev + 1);
       setCombo((prev) => prev + 1);
-      const points = 100 * (combo + 1);
+      const points = 10;
       setScore((prev) => prev + points);
       confetti({
         particleCount: 100,
@@ -178,15 +241,32 @@ const MemoryGame = () => {
     setIsChecking(false);
   };
 
-  const levelUp = () => {
-    setLevel((prev) => prev + 1);
-    // Ensure we always have an even number of cards
-    let newSize = Math.min(level + 2, 6); // Increment level size, but limit to 6x6 grid
-    if (newSize % 2 !== 0) newSize--; // Ensure even size
+  const levelUp = async () => {
+    // Update mark based on the current score, timeLeft, combo, and errors
+    mark = mark + score + timeLeft * 0.1 + combo - errors * 0.5;
+    // setMark((prev) => (prev + score + timeLeft * 0.1 + combo - errors * 0.5));
+    console.log(mark);
+
+    // Increment the level
+    level = level + 1;
+
+    // Ensure we always have an even number of cards, and limit to a 6x6 grid
+    let newSize = Math.min(2 * level, 6); // Increment level size, but limit to 6x6 grid
+    console.log(newSize);
+
     setRows(newSize);
     setColumns(newSize);
-    setTimeLeft((prev) => prev + 30);
+
+    // Add 60 seconds to the time left
+    setTimeLeft((prev) => prev + 60);
+
+    // Await the update of the game data before starting the new game
+    await updateGameData();
+
+    // Activate a power-up after data is updated
     activatePowerUp();
+
+    // Start the new game after data update and power-up activation
     startNewGame();
   };
 
@@ -239,15 +319,17 @@ const MemoryGame = () => {
         </motion.div>
       )}
 
-      <PokemonGameStatus
-        gameState={gameState}
-        level={level}
-        score={score}
-        combo={combo}
-        errors={errors}
-        timeLeft={timeLeft}
-        setGameState={setGameState}
-      />
+      {gameState === "playing" && (
+        <PokemonGameStatus
+          gameState={gameState}
+          level={level}
+          score={score}
+          combo={combo}
+          errors={errors}
+          timeLeft={timeLeft}
+          setGameState={setGameState}
+        />
+      )}
 
       {powerUp && (
         <motion.div
@@ -261,9 +343,16 @@ const MemoryGame = () => {
         </motion.div>
       )}
 
+      <div
+        className="absolute top-5 w-32 cursor-pointer" // Add cursor-pointer for hover effect
+        onClick={() => navigate("/user/Games")} // Navigate back to /user/Games
+      >
+        <img src={backLogo} alt="Back" />
+      </div>
+
       {gameState === "gameOver" && (
         <motion.div
-          className="mb-4 p-4 text-2xl font-bold bg-gradient-to-r from-red-500 to-purple-600 text-white rounded-xl shadow-lg border-4 border-red-300"
+          className="w-3/4 absolute left-40 mb-4 p-4 text-2xl font-bold bg-gradient-to-r from-red-500 to-purple-600 text-white rounded-xl shadow-lg border-4 border-red-300"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -287,7 +376,9 @@ const MemoryGame = () => {
         selectCard={selectCard}
       />
 
-      <PokemonStartButton onClick={startNewGame} gameState={gameState} />
+      <div className="absolute top-3/4 left-[600px] mt-16">
+        <PokemonStartButton onClick={startNewGame} gameState={gameState} />
+      </div>
     </div>
   );
 };

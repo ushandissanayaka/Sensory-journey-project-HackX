@@ -62,8 +62,8 @@ function App() {
   <Route path="/admin/doctors" element={ <ProtectedRoute><Doctors/></ProtectedRoute> }/>
   <Route path="/apply-doctor" element={ <ProtectedRoute><ApplyDoctor/></ProtectedRoute> }/>
   <Route path="/appoinments" element={ <ProtectedRoute><Appointments /></ProtectedRoute> }/>
-  <Route path="/game1" element={ <MemoryGame />}/>
-  <Route path="/game2" element={ <MazeQuest />}/>
+  <Route path="/memorygame" element={ <ProtectedRoute><MemoryGame /></ProtectedRoute>}/>
+  <Route path="/memoryquest" element={ <ProtectedRoute><MazeQuest /></ProtectedRoute>}/>
 </Routes>
 </Router>
 </AuthProvider>

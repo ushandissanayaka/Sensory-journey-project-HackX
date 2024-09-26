@@ -12,16 +12,43 @@ const PokemonGameStatus = ({
   timeLeft,
   setGameState,
 }) => {
-  if (gameState !== "playing") return null;
+
+  const getLevelMax = (level) => {
+    switch (level) {
+      case 1:
+      case 2:
+        return 0.2
+      case 3:
+        return 0.8;
+      case 4:
+        return 1.6;
+      case 5:
+        return 500;
+      case 6:
+        return 600;
+      case 7:
+        return 700;
+      case 8:
+        return 800;
+      case 9:
+        return 900;
+      case 10:
+        return 1000;
+      default:
+        return 100;
+    }
+  };
+
+  const levelMax = getLevelMax(level);
 
   return (
     <motion.div
-      className="m-4 p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl shadow-lg border-4 border-yellow-400"
+      className="w-3/4 absolute left-40 m-4 p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl shadow-lg border-4 border-yellow-400"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex justify-between gap-7 items-center">
+      <div className="flex justify-between gap-7 items-center h-12">
         <StatusItem
           icon={<Trophy size={24} />}
           label="Level"
@@ -83,7 +110,7 @@ const PokemonGameStatus = ({
         <motion.div
           className="h-full bg-gradient-to-r from-green-400 to-blue-500"
           initial={{ width: "0%" }}
-          animate={{ width: `${(score / (level * 100)) * 100}%` }}
+          animate={{ width: `${(score / (levelMax * 100)) * 100}%` }}
           transition={{ duration: 0.5 }}
         />
       </div>
