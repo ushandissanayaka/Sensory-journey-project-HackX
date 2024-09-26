@@ -339,6 +339,43 @@ const gameRetrieveController = async (req, res) => {
     });
   }
 };
+const gameDataRetrieveController = async (req, res) => {
+  try {   
+    const { userId } = req.query;
+    console.log(userId);
+    
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'userId is required'
+      });
+    }
+
+    let game = await gameModel.find({ userId});
+    console.log(game);
+    // If the game doesn't exist, create a new one with default values
+    
+    if(game){
+    res.status(200).json({
+      success: true,
+      message: "User game data fetched successfully",
+      data: game,
+    });
+  }else{
+    res.status(404).send({
+      success:false,
+      message:"User have not played any game yet"
+    });
+  }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: "Error fetching user game data",
+      error,
+    });
+  }
+};
 
 module.exports = {
   loginController,
@@ -352,5 +389,7 @@ module.exports = {
   bookingAvailabilityController,
   userAppoinmentsController,
   gameController,
-  gameRetrieveController
+  gameRetrieveController,
+  gameDataRetrieveController
+  
 };

@@ -16,6 +16,11 @@ export const userMenu = [
       icon: 'fa-solid fa-clipboard-list'
     },
     {
+      name: 'Progress',
+      path: "/user/Progress",
+      icon: 'fa-solid fa-clipboard-list'
+    },
+    {
       name: 'Contact Doctors',
       path: "/appoinments",
       icon: 'fa-solid fa-clipboard-list'

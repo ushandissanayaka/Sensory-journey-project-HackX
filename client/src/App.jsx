@@ -25,7 +25,7 @@ import Videos from './pages/user/Resources/Videos.jsx'
 import MemoryGame from './pages/MemoryGame.jsx'
 import MazeQuest from './pages/MazeQuest.jsx'
 import Doctorprofile from './pages/doctor/Doctorprofile.jsx'
-
+import Progress from './pages/user/Progress.jsx'
 function App() {
 
   
@@ -56,6 +56,7 @@ function App() {
   <Route path="/user/Resources/Articles" element={ <ProtectedRoute><Articles/></ProtectedRoute> }/>
   <Route path="/user/Resources/Guides" element={ <ProtectedRoute><Guides/></ProtectedRoute> }/>
   <Route path="/user/Resources/Videos" element={ <ProtectedRoute><Videos/></ProtectedRoute> }/>
+  <Route path="/user/Progress" element={ <ProtectedRoute><Progress/></ProtectedRoute> }/>
 
 
   <Route path="/user/Appointments" element={ <ProtectedRoute><UserAppointments/></ProtectedRoute> }/>

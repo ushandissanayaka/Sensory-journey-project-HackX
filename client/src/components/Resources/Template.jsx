@@ -11,7 +11,7 @@ const Template = ({Cover,Head,Children}) => {
             src={Cover}
             alt="Resources Cover"
           />
-          <div className="relative z-10 flex flex-col items-center justify-start h-full">
+          <div className="container relative z-10 flex flex-col items-center justify-start h-full">
             <h1 className="head1 text-6xl font-semibold text-center font-sedgwick">
               {Head}
             </h1>
