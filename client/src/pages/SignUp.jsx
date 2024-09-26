@@ -4,6 +4,9 @@ import { useDispatch } from 'react-redux';
 import { showLoading, hideLoading } from '../redux/features/alertSlice';
 import axios from 'axios';
 
+// Import the image from the assets folder
+import signupImage from '../assets/signupImage.jpeg';
+
 const SignUp = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -58,9 +61,9 @@ const SignUp = () => {
                 {/* Image */}
                 <div className="relative w-[400px]" style={{ zIndex: 10, marginRight: '-15px' }}>
                     <img
-                        src="https://via.placeholder.com/400x300"
+                        src={signupImage} 
                         alt="signup illustration"
-                        className="object-cover w-full h-full"
+                        className="object-cover w-full h-full rounded-3xl "
                     />
                 </div>
 

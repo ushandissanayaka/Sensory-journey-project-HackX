@@ -5,6 +5,8 @@ import { showLoading, hideLoading } from '../redux/features/alertSlice';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext'; // Import useAuth
+// Import the image from the assets folder
+import signupImage from '../assets/signupImage.jpeg';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -55,14 +57,14 @@ const Login = () => {
             className="flex items-center justify-center h-screen relative"
             style={{ background: 'linear-gradient(to right, #F6A4E9, #6a0dad, #000000)' }}
         >
-            <div className="relative w-400px" style={{ zIndex: 10 }}>
-                <img
-                    src="https://via.placeholder.com/400x300"
-                    alt="login illustration"
-                    className="object-cover w-full h-full"
-                    style={{ marginRight: '-10px', position: 'relative', zIndex: 10 }}
-                />
-            </div>
+            {/* Image */}
+            <div className="relative w-[400px]" style={{ zIndex: 10, marginRight: '-0.4px' }}>
+                    <img
+                        src={signupImage} 
+                        alt="signup illustration"
+                        className="object-cover w-full h-full rounded-3xl "
+                    />
+                </div>
 
             <div
                 className="relative w-700px shadow-lg rounded-2xl overflow-hidden flex"
@@ -104,6 +106,7 @@ const Login = () => {
                         <button
                             type="submit"
                             className="w-full py-2 px-4 mt-4 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition-colors duration-300"
+                            style={{ background: 'linear-gradient(to right,#6a0dad, #000000)' }}
                         >
                             Login
                         </button>
@@ -115,6 +118,7 @@ const Login = () => {
                             <Link
                                 to="/Signup"
                                 className="text-purple-600 font-semibold hover:text-purple-800"
+                                
                             >
                                 Sign up here
                             </Link>
