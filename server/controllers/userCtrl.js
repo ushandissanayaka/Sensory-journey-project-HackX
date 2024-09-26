@@ -276,7 +276,7 @@ const gameController = async (req, res) => {
 
     if (game) {
       // If the game exists, update the score, level, and time
-      game.score = mark;
+      game.score = game.score + mark;
       game.level = level;
       game = await game.save();
     } else {

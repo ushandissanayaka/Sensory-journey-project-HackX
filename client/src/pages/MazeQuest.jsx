@@ -18,8 +18,8 @@ const MAX_LEVEL = 4;
 
 const MazeQuest = () => {
   const [gameState, setGameState] = useState("start"); // "start", "intro", "playing", "over"
-  const [level, setLevel] = useState(1);
-  const [maze, setMaze] = useState([]);
+  let [level, setLevel] = useState(1);
+  let [maze, setMaze] = useState([]);
   const [playerPosition, setPlayerPosition] = useState({ x: 0, y: 0 });
   const [exitPosition, setExitPosition] = useState({ x: 0, y: 0 });
   const [moves, setMoves] = useState(0);
@@ -32,7 +32,7 @@ const MazeQuest = () => {
   const [userId, setUserId] = useState(null);
   const [gameId, setGameId] = useState(1);
 
-  const GRID_SIZE = GRID_SIZES[level - 1];
+  let GRID_SIZE = GRID_SIZES[level - 1];
 
   const navigate = useNavigate();
 
@@ -52,6 +52,7 @@ const MazeQuest = () => {
         const { score, level } = response.data.data; // Assuming backend sends these
         mark = score;
         setLevel(level);
+        GRID_SIZE = GRID_SIZES[level - 1];
       }
     } catch (error) {
       console.error("Error fetching game data:", error);
@@ -60,6 +61,12 @@ const MazeQuest = () => {
 
   // Function to update the game data (score and level) in the backend after each level or game over
   const updateGameData = async () => {
+    const userId = getUserIdFromToken();
+    if (userId) {
+      setUserId(userId);
+    } else {
+      // Handle case where userId is not found or token is invalid
+    }
     try {
       console.log(mark);
       await axios.post("http://localhost:8080/api/v1/user/game", {
@@ -146,7 +153,8 @@ const MazeQuest = () => {
     return newMaze;
   }, [GRID_SIZE]);
 
-  const initializeGame = useCallback(() => {
+  const initializeGame = useCallback(async () => {
+    await fetchGameData();
     const newMaze = generateMaze();
     setMaze(newMaze);
     setPlayerPosition({ x: 0, y: 0 });
@@ -156,10 +164,6 @@ const MazeQuest = () => {
     setGameOver(false);
     setEnergy(100);
   }, [generateMaze, GRID_SIZE]);
-
-  useEffect(() => {
-    initializeGame();
-  }, [initializeGame, level]);
 
   const movePlayer = useCallback(
     (dx, dy) => {
@@ -186,7 +190,6 @@ const MazeQuest = () => {
 
           if (newX === exitPosition.x && newY === exitPosition.y) {
             setGameWon(true);
-            alert(`Level Complete! You solved the maze in ${moves + 1} moves!`);
           }
 
           return { x: newX, y: newY };
@@ -196,6 +199,24 @@ const MazeQuest = () => {
     },
     [maze, exitPosition, gameWon, gameOver, GRID_SIZE, moves]
   );
+
+  // Use effect to handle the alert separately
+  useEffect(() => {
+    if (gameWon) {
+      console.log(level)
+      level = level + 1
+      if ((level-1) < MAX_LEVEL) {
+        mark = 0.1 * (energy*2 - moves)
+        updateGameData();
+        alert(`Level Complete! You solved the maze in ${moves} moves!`);
+        setTimeout(2000)
+        initializeGame();
+      } else {
+        setGameOver(true);
+        alert("Congratulations! You've completed all levels!");
+      }
+    }
+  }, [gameWon, level]);
 
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -219,17 +240,6 @@ const MazeQuest = () => {
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [movePlayer]);
-
-  useEffect(() => {
-    if (gameWon) {
-      if (level < MAX_LEVEL) {
-        setTimeout(() => setLevel((prevLevel) => prevLevel + 1), 2000);
-      } else {
-        setGameOver(true);
-        alert("Congratulations! You've completed all levels!");
-      }
-    }
-  }, [gameWon, level]);
 
   useEffect(() => {
     if (energy === 0) {
@@ -481,14 +491,13 @@ const MazeQuest = () => {
     return <StartPage />;
   } else if (gameState === "intro") {
     return <IntroPage />;
-  } else if (gameState === "over" || gameWon) {
+  } else if (gameState === "over") {
     return <GameOverScreen />;
   }
 
   // The main game screen (previously the default return)
   return (
     <div className="relative  w-full bg-green-600 bg-cover h-[100vh]">
-
       {/* Main Game Container */}
       <div className="relative flex items-center justify-center  z-10">
         <div className="bg-amber-50/90 rounded-3xl shadow-2xl p-8 max-w-md w-full mx-4">
