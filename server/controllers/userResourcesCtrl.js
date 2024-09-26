@@ -1,5 +1,6 @@
 const ResourcesModel = require('../models/ResourcesModel')
 const ResourcesGuidesModel = require('../models/ResourcesGuidesModel')
+const ResourcesProgressModel = require('../models/ResourcesProgressModel')
 const articleController = async (req, res) => {
     try {
       
@@ -89,7 +90,38 @@ const articleController = async (req, res) => {
       res.status(500).send({ success: false, message: `Guide Controller ${error.message}` });
     }
   };
+const resourcesProgressDataInserter=async (req,res)=>{
+  try {
+  const type=req.query.type;
+  const title=req.query.title;
+  console.log(type);
+  console.log(title);
+  const validTypes=['Articles','Guides','Videos','Webinars'];
+  if(!validTypes.includes(type)){
+    return res.status(400).send({ success: false, message: `Invalid type` });
+  }
+  let progress=await ResourcesProgressModel.findOne();
+  if(!progress){
+    progress=new ResourcesProgressModel({});
+
+  }
+  if (!progress[type]) {
+    progress[type] = [];
+  }
+
+  // Push the new title into the array
+  progress[type].push(title);
+  await progress.save();
+  return res.status(200).send({ success: true, message: `${title} inserted to ${type} successfully` });
 
 
+}catch (error) {
+  console.log(error);
+  
+  return res.status(500).send({ success: false, message: `Progress Inserter ${error.message}` });
+}
 
-  module.exports={articleController,guideController}
+};
+
+
+  module.exports={articleController,guideController,resourcesProgressDataInserter}

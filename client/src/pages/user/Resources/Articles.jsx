@@ -33,7 +33,7 @@ const Articles = () => {
                   ]);
                   setLoadingHome(false)
                   setArticlesData(transformedArticles); // Set transformed array in state
-                  s
+
             }
             
         } catch (error) {
@@ -45,7 +45,25 @@ const Articles = () => {
     fetchArticles(); // Call the function
 
 }, []);
+  const readHandle=async (title)=>{
+    
+    try {
+      
+      const res=await axios.post(`http://localhost:8080/api/v1/user/resources?title=${title}&type=${'Articles'}`,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+          
+      }
 
+      )
+      if(res.data.success){
+        console.log(res.data.message)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const searchHandle=async (e)=>{
     e.preventDefault();
@@ -99,7 +117,7 @@ const Articles = () => {
 
       
         {loading ? <Loader></Loader> : <div className='row2 relative'>{ArticlesData.map(article=>(
-            <div className='box3 w-3/4 left-14 h-fit relative'>        <ArticlesCard  Title={article[1]} Description={article[2]} Link={article[3]}></ArticlesCard></div>
+            <div className='box3 w-3/4 left-14 h-fit relative'>        <ArticlesCard readHandle={readHandle}  Title={article[1]} Description={article[2]} Link={article[3]}></ArticlesCard></div>
         
         ))}</div>} 
         

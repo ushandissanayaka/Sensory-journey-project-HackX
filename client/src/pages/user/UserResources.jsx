@@ -21,7 +21,7 @@ const UserResources = () => {
             alt="Resources Cover"
           />
           <div className="relative z-10 flex flex-col items-center justify-start h-full">
-            <h1 className="head2 text-6xl font-semibold text-gray-500 text-center font-mono">
+            <h1 className="head2 text-6xl font-semibold  text-center font-mono">
               Resources for Autism Support
             </h1>
 
@@ -32,7 +32,7 @@ const UserResources = () => {
               <ResourceCard ArticlePic={ArticlePic} Title='Articles' Description='Explore our collection of articles to learn more about autism, treatments, and helpful tips for supporting your child. Each article is written to give you clear and practical advice for everyday challenges.' nextLink='/user/Resources/Articles'></ResourceCard>
               <ResourceCard ArticlePic={GuidePic} Title='Guides' Description='Browse our guides for step-by-step advice on supporting your autistic child. Each guide is designed to give you clear and practical instructions to help with everyday tasks.' nextLink='/user/Resources/Guides'></ResourceCard>
               <ResourceCard ArticlePic={VideoPic} Title='Videos' Description='Watch our videos for simple and helpful tips on autism, therapies, and daily support. Each video is made to give you easy-to-follow guidance and insights.' nextLink='/user/Resources/Videos'></ResourceCard>
-              <ResourceCard ArticlePic={WebinarPic} Title='Webinars' Description='Browse our guides for step-by-step advice on supporting your autistic child. Each guide is designed to give you clear and practical instructions to help with everyday tasks.' nextLink></ResourceCard>
+              <ResourceCard ArticlePic={WebinarPic} Title='Webinars' Description='Browse our guides for step-by-step advice on supporting your autistic child. Each guide is designed to give you clear and practical instructions to help with everyday tasks.' nextLink='/user/Resources/Webinars'></ResourceCard>
               
               
 
