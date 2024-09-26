@@ -92,6 +92,7 @@ const articleController = async (req, res) => {
   };
 const resourcesProgressDataInserter=async (req,res)=>{
   try {
+  const userId=req.query.userId;
   const type=req.query.type;
   const title=req.query.title;
   console.log(type);
@@ -100,9 +101,9 @@ const resourcesProgressDataInserter=async (req,res)=>{
   if(!validTypes.includes(type)){
     return res.status(400).send({ success: false, message: `Invalid type` });
   }
-  let progress=await ResourcesProgressModel.findOne();
+  let progress=await ResourcesProgressModel.findOne({userId});
   if(!progress){
-    progress=new ResourcesProgressModel({});
+    progress=new ResourcesProgressModel({userId:userId});
 
   }
   if (!progress[type]) {
@@ -122,6 +123,30 @@ const resourcesProgressDataInserter=async (req,res)=>{
 }
 
 };
+const resourcesProgressDataGetter=async (req,res)=>{
+  try {
+  const userId=req.query.userId;
+  
+  const validTypes=['Articles','Guides','Videos','Webinars'];
+  
+  let progress=await ResourcesProgressModel.findOne({userId});
+  if(!progress){
+    progress=new ResourcesProgressModel({userId:userId});
+
+  }
+  
+
+ 
+  return res.status(200).send({ success: true, message: `progress Get successful`,data:progress });
 
 
-  module.exports={articleController,guideController,resourcesProgressDataInserter}
+}catch (error) {
+  console.log(error);
+  
+  return res.status(500).send({ success: false, message: `Progress Getter ${error.message}` });
+}
+
+};
+
+
+  module.exports={articleController,guideController,resourcesProgressDataInserter,resourcesProgressDataGetter}

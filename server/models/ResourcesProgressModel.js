@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const resourcesProgressSchema = new mongoose.Schema({
+    userId:{
+        type:String,
+        required:true
+    },
     Articles:{
         type:[String]
     },

@@ -6,6 +6,7 @@ import GuidesCover  from '../../../assets/GuidesCover.jpg'
 import Template from '../../../components/Resources/Template'
 import ArticlesCard from './ArticlesCard';
 import './Articles.css'
+import { jwtDecode } from 'jwt-decode';
 const Guides = () => {
   
   const [serachInput,setSearchInput]=useState('')
@@ -13,6 +14,7 @@ const Guides = () => {
   const [ResourceData,setResourceData]=useState([])
   const [loading,setLoading]=useState(false)
   const [loadingHome,setLoadingHome]=useState(false)
+  const [userId,setUserId]=useState('')
 
   
   useEffect(() => {
@@ -45,11 +47,30 @@ const Guides = () => {
     fetchResources(); // Call the function
 
 }, []);
+const getUserIdFromToken = () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    try {
+      const decodedToken = jwtDecode(token);
+      return decodedToken.id; // assuming 'id' is the field containing the userId
+    } catch (error) {
+      console.error("Invalid token:", error);
+      return null;
+    }
+  }
+  return null;
+};
 const readHandle=async (title)=>{
-    
+  const userId = getUserIdFromToken();
+  console.log(userId)
+      if (userId) {
+        setUserId(userId);
+      } else {
+        
+      }
   try {
     
-    const res=await axios.post(`http://localhost:8080/api/v1/user/resources?title=${title}&type=${'Guides'}`,{
+    const res=await axios.post(`http://localhost:8080/api/v1/user/resources?title=${title}&type=${'Guides'}&userId=${userId}`,{
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },

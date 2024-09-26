@@ -1,7 +1,7 @@
 const express = require('express');
 const { loginController, registerController, authController, applyDoctorController,getAllNotificationController, deleteAllNotificationController, getAllDoctorsController, bookAppointmentController, bookingAvailabilityController, userAppoinmentsController, gameController, gameRetrieveController,gameDataRetrieveController } = require('../controllers/userCtrl');
 const authMiddleware = require('../midddlewares/authMiddleware');
-const {articleController,guideController,resourcesProgressDataInserter} = require('../controllers/userResourcesCtrl')
+const {articleController,guideController,resourcesProgressDataInserter,resourcesProgressDataGetter} = require('../controllers/userResourcesCtrl')
 
 // router object
 const router = express.Router();
@@ -47,4 +47,5 @@ router.get('/resources/article',authMiddleware,articleController)
 router.get('/resources/guide',authMiddleware,guideController)
 router.get('/progress',authMiddleware,gameDataRetrieveController)
 router.post('/resources',resourcesProgressDataInserter)
+router.get('/resources',resourcesProgressDataGetter)
 module.exports = router;
