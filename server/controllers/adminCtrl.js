@@ -65,6 +65,36 @@ const getAllDoctorsController = async(req,res) => {
     }
 };
 
+
+const deleteDoctorController = async (req, res) => {
+    try {
+        const doctorId = req.params.id; // Extracting doctor ID from request params
+
+        const deletedDoctor = await doctorModel.findByIdAndDelete(doctorId);
+
+        if (!deletedDoctor) {
+            return res.status(404).send({
+                success: false,
+                message: 'Doctor not found',
+            });
+        }
+
+        res.status(200).send({
+            success: true,
+            message: 'Doctor deleted successfully',
+            data: deletedDoctor,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: 'Error while deleting doctor',
+            error,
+        });
+    }
+};
+
+
 //account status change
 const changeAccountStatusController = async(req,res) => {
 try {
@@ -98,4 +128,4 @@ try {
 
 
 
-module.exports = { getAllUsersController, getAllDoctorsController, changeAccountStatusController, deleteUserController}
+module.exports = { getAllUsersController, getAllDoctorsController, changeAccountStatusController, deleteUserController, deleteDoctorController}
