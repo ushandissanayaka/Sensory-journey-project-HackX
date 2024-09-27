@@ -51,7 +51,7 @@ const PieChart1 = ({ menu }) => {
           
           title: {
             display: true,
-            text: 'Current Progress',
+            text: "Child's Progress",
             color:'red',
             font:{
                 size:'20'
@@ -70,9 +70,11 @@ const PieChart1 = ({ menu }) => {
   }, []);
 
   return (
-    <div className=" rounded-lg h-1/2 overflow-hidden min-w-fit ">
+    <div className='h-1/2 flex justify-start  w-full'>
+    <div className="relative rounded-lg h-full  overflow-hidden ">
       
       <canvas className="p-1 shadow-lg h-full bg-white rounded-lg ml-40 mr-40 " id="chartPie"></canvas>
+    </div>
     </div>
   );
 }

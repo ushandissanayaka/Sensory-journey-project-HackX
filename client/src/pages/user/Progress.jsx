@@ -6,12 +6,13 @@ import Loader from '../../components/Loader'
 import { jwtDecode } from 'jwt-decode'
 import axios from 'axios'
 import './Progress.css'
+import ProgressCard from './ProgressCard'
 const Progress = () => {
     const [gameData,setGameData]=useState([])
     const [userId,setUserId]=useState('')
     const [loading,setLoading]=useState(false)
     const [resourcesData,setResourcesData]=useState([])
-
+    
     const getUserIdFromToken = () => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -47,10 +48,16 @@ const Progress = () => {
                     [game.gameId,
                     game.score,
                     game.level]
+
                 )
+                
                 
                 setLoading(false)
                 setGameData(transformedData)
+                 menu = menu.map(item => {
+                    const gameProgress = transformedData.find(game => game.gameId === item.gameId);
+                    return gameProgress ? { ...item, score: gameProgress.score } : item;
+                  });
                 
             }
             else{
@@ -108,7 +115,7 @@ const Progress = () => {
     },[])
 
 
-    const menu=[
+    let menu=[
         {
             gameId:'0',
             tag1:'Visual',
@@ -146,7 +153,40 @@ const Progress = () => {
         <>
         {loading ? <Loader/> : 
         
-            <PieChart1 menu={menu}/>
+            <><PieChart1 menu={menu}/>
+            
+             <div className='tasks h-1/2 w-full'
+ style={{
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backdropFilter: 'blur(10px)', 
+    padding:'10px',
+    overflow:'hidden',
+    display: 'grid',
+    gridColumnGap:'10px',
+    
+    borderRadius: '10px',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+  }}>
+    <div className='h-full w-full hover:shadow-2xl transition-shadow duration-300'>
+   <ProgressCard color={'#5ad25f'} title={'Articles'} description={'Keep reading articles to help your child'} number={!loading && resourcesData && resourcesData.Articles ? resourcesData.Articles.length :0} percentage={!loading && resourcesData && resourcesData.Articles 
+      ? `${(resourcesData.Articles.length / 4) * 100}%` 
+      : '0%'}></ProgressCard>
+    </div>
+    <div className='h-full w-full hover:shadow-2xl transition-shadow duration-300'>
+    <ProgressCard color={'#2880ff'} title={'Guides'} description={'Keep following guides to direct your child'} number={!loading && resourcesData && resourcesData.Guides ? resourcesData.Guides.length :0} percentage={!loading && resourcesData && resourcesData.Guides ? `${(resourcesData.Guides.length / 4) * 100}%` 
+      : '0%'}></ProgressCard>
+    </div>
+    <div className='h-full w-full hover:shadow-2xl transition-shadow duration-300'>
+    <ProgressCard color={'#fff933'} title={'Videos'} description={'Keep watching videos to learn about autism'} number={!loading && resourcesData && resourcesData.Videos ? resourcesData.Videos.length :0} percentage={!loading && resourcesData && resourcesData.Videos ? `${(resourcesData.Videos.length / 4) * 100}%` 
+      : '0%'}></ProgressCard>
+    </div>
+    <div className='h-full w-full hover:shadow-2xl transition-shadow duration-300'>
+    <ProgressCard color={'#ff2fe2'} title={'Webinars'} description={'Keep attending webinars bring you questions to end'} number={!loading && resourcesData && resourcesData.Webinars ? resourcesData.Webinars.length :0} percentage={!loading && resourcesData && resourcesData.Webinars ? `${(resourcesData.Webinars.length / 4) * 100}%` 
+      : '0%'}></ProgressCard>
+    </div>
+            
+            </div>
+            </>
           
 
 
