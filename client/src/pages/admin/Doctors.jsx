@@ -5,6 +5,8 @@ import doctor1 from '../../assets/doctor1.jpeg';
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const doctorsPerPage = 5;
 
   // Get doctors
   const getDoctors = async () => {
@@ -47,11 +49,22 @@ const Doctors = () => {
     getDoctors();
   }, []);
 
+  // Get current doctors
+  const indexOfLastDoctor = currentPage * doctorsPerPage;
+  const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
+  const currentDoctors = doctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const totalPages = Math.ceil(doctors.length / doctorsPerPage);
+
   return (
     <Layout>
       <div 
-           className="bg-cover bg-center" 
-           style={{ backgroundImage: `url(${doctor1})`, height: 'calc(100vh - 14vh)' }}>
+        className="bg-cover bg-center" 
+        style={{ backgroundImage: `url(${doctor1})`, height: 'calc(100vh - 10vh)' }}
+      >
         <h1 className="text-4xl font-bold mb-4 text-white text-center">All Doctors</h1>
         <div className="overflow-x-auto bg-white bg-opacity-30 rounded-lg p-4">
           <table className="min-w-full bg-white bg-opacity-50">
@@ -64,7 +77,7 @@ const Doctors = () => {
               </tr>
             </thead>
             <tbody>
-              {doctors.map((doctor) => (
+              {currentDoctors.map((doctor) => (
                 <tr
                   key={doctor._id}
                   className="bg-white shadow-lg bg-opacity-60 rounded-lg my-2" 
@@ -93,6 +106,33 @@ const Doctors = () => {
               ))}
             </tbody>
           </table>
+
+          {/* Pagination controls */}
+          <div className="flex justify-center mt-4 space-x-2">
+            <button
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-4 py-2 bg-gray-300 rounded"
+            >
+              Previous
+            </button>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => paginate(index + 1)}
+                className={`px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 bg-gray-300 rounded"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </Layout>

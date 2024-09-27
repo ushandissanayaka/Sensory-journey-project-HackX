@@ -5,6 +5,8 @@ import usersImage from '../../assets/users.jpg'; // Ensure the image path is cor
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5;
 
   // Get users
   const getUsers = async () => {
@@ -47,11 +49,20 @@ const Users = () => {
     getUsers();
   }, []);
 
+  // Pagination logic
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(users.length / usersPerPage);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <Layout>
       <div
         className="bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${usersImage})`, height: 'calc(100vh - 14vh)' }} // Reduce height by 10px
+        style={{ backgroundImage: `url(${usersImage})`, height: 'calc(100vh - 10vh)' }} // Reduce height by 10px
       >
         <div className="absolute inset-0 bg-black opacity-40"></div> {/* Dark overlay */}
         <h1 className="text-4xl font-bold mb-4 text-white text-center relative">Users List</h1>
@@ -66,7 +77,7 @@ const Users = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {currentUsers.map((user) => (
                 <tr
                   key={user._id}
                   className="bg-white shadow-lg bg-opacity-60 rounded-lg my-2"
@@ -87,6 +98,33 @@ const Users = () => {
               ))}
             </tbody>
           </table>
+
+          {/* Pagination controls */}
+          <div className="flex justify-center mt-4 space-x-2">
+            <button
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-4 py-2 bg-gray-300 rounded"
+            >
+              Previous
+            </button>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => paginate(index + 1)}
+                className={`px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 bg-gray-300 rounded"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </Layout>
