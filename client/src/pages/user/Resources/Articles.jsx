@@ -6,12 +6,14 @@ import ArticlesCover  from '../../../assets/ArticlesCover.jpg'
 import Template from '../../../components/Resources/Template'
 import ArticlesCard from './ArticlesCard';
 import './Articles.css'
+import { jwtDecode } from 'jwt-decode';
 const Articles = () => {
   const [serachInput,setSearchInput]=useState('')
   const [searchResult,setSearchResult]=useState(false)
   const [ArticlesData,setArticlesData]=useState([])
   const [loading,setLoading]=useState(false)
   const [loadingHome,setLoadingHome]=useState(false)
+  const [userId,setUserId]=useState('')
 
   
   useEffect(() => {
@@ -33,7 +35,7 @@ const Articles = () => {
                   ]);
                   setLoadingHome(false)
                   setArticlesData(transformedArticles); // Set transformed array in state
-                  s
+
             }
             
         } catch (error) {
@@ -45,7 +47,44 @@ const Articles = () => {
     fetchArticles(); // Call the function
 
 }, []);
+const getUserIdFromToken = () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    try {
+      const decodedToken = jwtDecode(token);
+      return decodedToken.id; // assuming 'id' is the field containing the userId
+    } catch (error) {
+      console.error("Invalid token:", error);
+      return null;
+    }
+  }
+  return null;
+};
+  const readHandle=async (title)=>{
+    const userId = getUserIdFromToken();
+    console.log(userId)
+        if (userId) {
+          setUserId(userId);
+        } else {
+          
+        }
+    try {
+      
+      const res=await axios.post(`http://localhost:8080/api/v1/user/resources?title=${title}&type=${'Articles'}&userId=${userId}`,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+          
+      }
 
+      )
+      if(res.data.success){
+        console.log(res.data.message)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const searchHandle=async (e)=>{
     e.preventDefault();
@@ -99,7 +138,7 @@ const Articles = () => {
 
       
         {loading ? <Loader></Loader> : <div className='row2 relative'>{ArticlesData.map(article=>(
-            <div className='box3 w-3/4 left-14 h-fit relative'>        <ArticlesCard  Title={article[1]} Description={article[2]} Link={article[3]}></ArticlesCard></div>
+            <div className='box3 w-3/4 left-14 h-fit relative'>        <ArticlesCard readHandle={readHandle}  Title={article[1]} Description={article[2]} Link={article[3]}></ArticlesCard></div>
         
         ))}</div>} 
         

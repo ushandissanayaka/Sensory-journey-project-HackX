@@ -10,6 +10,7 @@ const Progress = () => {
     const [gameData,setGameData]=useState([])
     const [userId,setUserId]=useState('')
     const [loading,setLoading]=useState(false)
+    const [resourcesData,setResourcesData]=useState([])
 
     const getUserIdFromToken = () => {
         const token = localStorage.getItem("token");
@@ -67,6 +68,46 @@ const Progress = () => {
         
 
     },[])
+    //for resources
+    useEffect(()=>{
+        const userId = getUserIdFromToken();
+        if (userId) {
+          setUserId(userId);
+        } else {
+          
+        }
+        try {
+            setLoading(true)
+        const fetchResourceProgress=async()=>{
+            const res = await axios.get(`http://localhost:8080/api/v1/user/resources?userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+                
+            });
+            if(res.data.success){
+                
+                
+                setLoading(false)
+                setResourcesData(res.data.data)
+                
+            }
+            else{
+                setLoading(false)
+                console.log(res.data.message)
+            }
+            
+        }
+        fetchResourceProgress()
+
+
+
+        } catch (error) {
+            
+        }
+    },[])
+
+
     const menu=[
         {
             gameId:'0',
