@@ -24,24 +24,21 @@ const Users = () => {
     }
   };
 
-  // Handle account actions (e.g., blocking)
+  // Handle account actions (Deleting a user)
   const handleAccountAction = async (userId) => {
     try {
-      const res = await axios.post(
-        'http://localhost:8080/api/v1/admin/blockUser',
-        { userId },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        }
-      );
+      const res = await axios.delete(`http://localhost:8080/api/v1/admin/delete-user/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
       if (res.data.success) {
         alert(res.data.message);
-        window.location.reload();
+        // Remove the deleted user from the current users list
+        setUsers(users.filter((user) => user._id !== userId));
       }
     } catch (error) {
-      alert('Something went wrong');
+      alert('Something went wrong while deleting the user');
     }
   };
 
@@ -91,7 +88,7 @@ const Users = () => {
                       className="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600"
                       onClick={() => handleAccountAction(user._id)}
                     >
-                      Block
+                      Delete
                     </button>
                   </td>
                 </tr>
@@ -112,7 +109,9 @@ const Users = () => {
               <button
                 key={index + 1}
                 onClick={() => paginate(index + 1)}
-                className={`px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'}`}
+                className={`px-4 py-2 rounded ${
+                  currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300'
+                }`}
               >
                 {index + 1}
               </button>
