@@ -2,7 +2,7 @@
 export const userMenu = [
     {
       name: 'Dashboard',
-      path: '/',
+      path: '/user/Progress',
       icon: "fa-solid fa-house"
     },
     {
@@ -15,11 +15,11 @@ export const userMenu = [
       path: "/user/Resources",
       icon: 'fa-solid fa-clipboard-list'
     },
-    {
-      name: 'Progress',
-      path: "/user/Progress",
-      icon: 'fa-solid fa-clipboard-list'
-    },
+    // {
+    //   name: 'Progress',
+    //   path: "/user/Progress",
+    //   icon: 'fa-solid fa-clipboard-list'
+    // },
     {
       name: 'Contact Doctors',
       path: "/appoinments",
@@ -30,18 +30,18 @@ export const userMenu = [
       path: '/apply-doctor',
       icon: 'fa-solid fa-user-doctor'
     },
-    {
-      name: 'Profile',
-      path: '/profile',
-      icon: 'fa-solid fa-user'
-    },
+    // {
+    //   name: 'Profile',
+    //   path: '/profile',
+    //   icon: 'fa-solid fa-user'
+    // },
   ];
   
   // Admin Menu
   export const adminMenu = [
     {
       name: 'Dashboard',
-      path: '/',
+      path: '/PublicDashboard',
       icon: "fa-solid fa-house"
     },
     {
@@ -54,10 +54,10 @@ export const userMenu = [
       path: '/admin/users',
       icon: 'fa-solid fa-user'
     },
-    {
-      name: 'Profile',
-      path: '/profile',
-      icon: 'fa-solid fa-user'
-    },
+    // {
+    //   name: 'Profile',
+    //   path: '/profile',
+    //   icon: 'fa-solid fa-user'
+    // },
   ];
   
