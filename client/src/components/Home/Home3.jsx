@@ -1,85 +1,69 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Home3.css';
+import img1 from '../../assets/home1.jpg';
+import img2 from '../../assets/home2.jpg';
+import img3 from '../../assets/home3.jpg';
+import img4 from '../../assets/home4.jpg';
+import img5 from '../../assets/home5.jpg';
+import img6 from '../../assets/home6.jpg';
+import img7 from '../../assets/home7.jpg';
 
 function Home3() {
-  const cardContainerRef = useRef(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [selectedParagraph, setSelectedParagraph] = useState(''); // New state for storing paragraph content
+  const [visibleCards, setVisibleCards] = useState([...Array(7).keys()].map(i => i + 1)); // Initially all cards visible
+  const [initialLoad, setInitialLoad] = useState(true); // Track the first load
+  const cardsRef = useRef([]);
 
-  const scrollLeft = () => {
-    const container = cardContainerRef.current;
-    const cardWidth = container.querySelector('.card').offsetWidth + 20; // Card width + gap (20px)
-    container.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-  };
-
-  const scrollRight = () => {
-    const container = cardContainerRef.current;
-    const cardWidth = container.querySelector('.card').offsetWidth + 20; // Card width + gap (20px)
-    container.scrollBy({ left: cardWidth, behavior: 'smooth' });
-  };
-
-  const openPopup = (cardIndex, paragraph) => {
-    setSelectedCard(cardIndex);
-    setSelectedParagraph(paragraph);
-    setIsPopupOpen(true);
-  };
-
-  const closePopup = () => {
-    setIsPopupOpen(false);
-  };
-
-  // Pause the animation when popup is open
   useEffect(() => {
-    const container = cardContainerRef.current;
-    if (isPopupOpen) {
-      container.style.animationPlayState = 'paused';
-    } else {
-      container.style.animationPlayState = 'running';
-    }
-  }, [isPopupOpen]);
+    const toggleVisibility = () => {
+      setVisibleCards([...Array(7).keys()].map(i => i + 1)); // Show all cards
+
+      // After 3 seconds of being visible, hide all cards
+      setTimeout(() => {
+        setVisibleCards([]); // Hide all cards
+      }, 5000); // Hide cards after 3 seconds
+    };
+
+    // First, run the toggleVisibility function after 5 seconds
+    const firstTimeout = setTimeout(() => {
+      setInitialLoad(false); // After 5 seconds, remove the first-time load class
+      toggleVisibility(); // Start hiding and showing cards
+    }, 1000);
+
+    // Set an interval to run the toggleVisibility every 5 seconds
+    const interval = setInterval(() => {
+      toggleVisibility();
+    },  10000); // Total interval time: 5 seconds before showing, + 3 seconds display time
+
+    return () => {
+      clearTimeout(firstTimeout); // Cleanup the first timeout
+      clearInterval(interval); // Cleanup the interval on unmount
+    };
+  }, []);
 
   return (
     <div className="home-container">
-      {/* Header */}
-      <h1 className="header">Users Feedbacks</h1>
-
-      <div className="carousel">
-        <div className="card-container" ref={cardContainerRef}>
-          {[...Array(10)].map((_, index) => {
-            const paragraph = `This is a detailed description for card ${index + 1}. It includes multiple sentences that provide more information about the card. 
-            This is a sample of a longer text that will be shown in the popup.`;
-            return (
-              <div
-                key={index}
-                className="card"
-                onClick={() => openPopup(index + 1, paragraph)}
-              >
-                <img
-                  src={`https://via.placeholder.com/400x200?text=Image+${index + 1}`}
-                  alt={`Card ${index + 1}`}
-                />
-                <h2>Card {index + 1}</h2>
-                <p>{paragraph.split('. ')[0] + '.'}</p> {/* Show only the first sentence */}
-                <button>See More...</button>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Popup Modal */}
-      {isPopupOpen && (
-        <div className="popup-overlay" onClick={closePopup}>
-          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-            <h2>Card {selectedCard}</h2>
-            <p>{selectedParagraph}</p> {/* Show the full paragraph */}
-            <button className="close-btn" onClick={closePopup}>
-              Close
-            </button>
+      <div className="left-header">Dont't Be sad ....</div>
+      <div className="right-header">You are in contact with the best solution !</div>
+      <div className="circular-grid">
+        {[...Array(7)].map((_, index) => (
+          <div
+            key={index}
+            className={`card card-${index + 1} ${visibleCards.includes(index + 1) ? 'visible' : 'invisible'} ${initialLoad ? 'first-time' : ''}`}
+            ref={(el) => (cardsRef.current[index] = el)}
+          >
+            <img
+              src={index === 0 ? img1 :
+                   index === 1 ? img2 :
+                   index === 2 ? img3 :
+                   index === 3 ? img4 :
+                   index === 4 ? img5 :
+                   index === 5 ? img6 :
+                   img7}
+              alt={`Card ${index + 1}`}
+            />
           </div>
-        </div>
-      )}
+        ))}
+      </div>
     </div>
   );
 }
