@@ -32,8 +32,8 @@ const Layout = ({ children }) => {
     ? adminMenu
     : user?.isDoctor
     ? [
-        { name: 'Dashboard', path: '/', icon: 'fa-solid fa-house' },
-        { name: 'Appointments', path: '/doctor-appointments', icon: 'fa-solid fa-clipboard-list' },
+        { name: 'Dashboard', path: '/PublicDashboard', icon: 'fa-solid fa-house' },
+        //{ name: 'Appointments', path: '/doctor-appointments', icon: 'fa-solid fa-clipboard-list' },
         { name: 'Profile', path: `/doctor/profile/${user?._id}`, icon: 'fa-solid fa-user' },
       ]
     : userMenu;
