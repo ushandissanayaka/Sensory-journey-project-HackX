@@ -1,0 +1,28 @@
+
+#card-area {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Full viewport height to center vertically */
+    width: 100%;
+    border-radius: 15px;
+    background-color: #c084fc75;
+    ;
+}
+
+.wrapper {
+    width: 100%; 
+    height: 100%; 
+    overflow-y: auto; 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Ensures two boxes per row */
+    grid-column-gap: 100px; /* Adds gap between rows and columns */
+    padding: 20px;
+    grid-row-gap: 30px;
+   
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
