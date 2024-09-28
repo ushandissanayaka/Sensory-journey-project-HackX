@@ -27,6 +27,10 @@ import MazeQuest from './pages/MazeQuest.jsx'
 import Doctorprofile from './pages/doctor/Doctorprofile.jsx'
 import Progress from './pages/user/Progress.jsx'
 import Webinars from './pages/user/Resources/Webinars.jsx'
+
+
+
+import DoctorList from './components/Home/DoctorList.jsx'
 function App() {
 
   
@@ -68,6 +72,9 @@ function App() {
   <Route path="/memorygame" element={ <ProtectedRoute><MemoryGame /></ProtectedRoute>}/>
   <Route path="/memoryquest" element={ <MazeQuest />}/>
   <Route path="/doctor/profile/:id" element={<ProtectedRoute><Doctorprofile/></ProtectedRoute>}/>
+
+
+  <Route path="/doctor-list" element={<DoctorList />} />
 </Routes>
 </Router>
 </AuthProvider>
