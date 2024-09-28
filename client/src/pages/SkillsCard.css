@@ -1,0 +1,74 @@
+.box {
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px black;
+    width: 100%;
+    min-width: 290px;
+    min-height: 254px;
+    max-height: 254px;
+    height: 100%;
+}
+
+.box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: block;
+    transition: transform 0.5s;
+}
+.overlay .p1{
+    color: white;
+}
+
+.overlay3 {
+    height: 100%; /* Keep the full height of the box */
+    width: 100%;
+    background: linear-gradient(transparent, #04120e 30%);
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    bottom: -100%; /* Start off-screen */
+    display: flex;
+    align-items: center;
+   
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding-inline: 5%;
+    padding-block: 20px; /* Add some padding on top and bottom */
+    font-size: 14px;
+    transition: bottom 0.5s ease; /* Animate the 'bottom' position */
+    
+    
+    
+}
+
+.overlay3 h3 {
+    font-weight: 500;
+    width: 100%;
+    margin-bottom: 5px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-align: center;
+    color: rgb(231, 192, 255);
+    
+}
+
+.overlay3 p {
+    color: white;
+    font-family:sans-serif; /* Inherit color from .overlay */
+}
+.box:hover img {
+    transform: scale(1.2);
+}
+
+.box:hover .overlay3 {
+    bottom: 0; /* Bring the overlay up when hovering */
+}
+
+.overlay3 .tags{
+    position: absolute;
+    bottom: 15px;
+    
+}

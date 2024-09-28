@@ -1,5 +1,6 @@
 
 import './App.css'
+import SkillsCenters from './pages/SkillsCenters.jsx'
 import Home from './components/Home/Home.jsx'
 import Home2 from './components/Home/Home2'
 import Home3 from './components/Home/Home3'
@@ -50,6 +51,7 @@ function App() {
   <Route path="/" element={<><Home /><Home2 /><Home3 /></>} />
   <Route path="/Games" element={<Games height={'100vh'} />} />
   <Route path="/SignUp" element={<PublicRoute><SignUp /></PublicRoute>} />
+  <Route path="/Skill Centers" element={<SkillsCenters />} />
   <Route path="/Login" element={     <PublicRoute><Login /></PublicRoute>} />
   <Route path="/PublicDashboard" element={ <ProtectedRoute><PublicDashboard/></ProtectedRoute> }/>
   <Route path="/user/Games" element={<ProtectedRoute><UserGames /> </ProtectedRoute>}/>
