@@ -19,7 +19,7 @@ function Navbar() {
   const navItems = [
     { link: "Home", Path: "/" },
     { link: "Games", Path: "/Games" },
-    { link: "Doctors", Path: "/Doctors" },
+    { link: "Doctors", Path: "/doctor-list" },
     { link: "Skill Centers", Path: "/Skill Centers" },
   ];
 
